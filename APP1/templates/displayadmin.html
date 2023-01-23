@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="width:100%;margin-left:300px; margin-top:100px;" >
+
+  <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Admin Details</h4>
+<!--                    <p class="card-description"> Add class <code>.table-bordered</code>-->
+<!--                    </p>-->
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Name </th>
+                          <th> MobileNumber </th>
+                          <th> EmailID</th>
+                          <th> Image </th>
+                          <th>UserName</th>
+                          <th>Password</th>
+                          <th>ConfirmPassword</th>
+                        </tr>
+                      </thead>
+                         {% for i in data %}
+                         <tr>
+                                <td> {{i.Name}} </td>
+                                <td>{{i.MobileNumber}}</td>
+                                <td>{{i.EmailID}}</td>
+                                <td>
+                                     <img src="{{ i.Image.url }}" width="50px" height="50px">
+                                </td>
+                                <td> {{i.UserName}} </td>
+                                <td> {{i.Password}} </td>
+                                <td> {{i.ConfirmPassword}} </td>
+                                <td>
+                                  <form action="{% url 'editadmin'  dataid=i.id %}">
+                                  {% csrf_token %}
+                                   <button type="submit" class="btn btn-primary">Edit</button>
+                                 </form>
+                                </td>
+                              <td>
+                                  <form action="{% url 'deleteadmin'  dataid=i.id %}">
+                                  {% csrf_token %}
+                                   <button type="submit" class="btn btn-primary">Delete</button>
+                                 </form>
+                                </td>
+                         </tr>
+                         {% endfor %}
+
+                    </table>
+                  </div>
+                </div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="width:80%; margin-left:300px;">
+<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Blog Details</h5>
+			  <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Name</th>
+                       <th scope="col">EmailID</th>
+                       <th scope="col">Website</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in data %}
+                  <tr>
+
+                            <td> {{i.Comment}} </td>
+                             <td>{{i.Name}}</td>
+                            <td>{{i.EmailID}}</td>
+                              <td>{{i.Website}}</td>
+                      <td>
+                          <form action="{% url 'delblog' dataid=i.id %}">
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                          </form>
+                      </td>
+
+
+
+                  </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+
+</body>
+</html>
+{% endblock %}

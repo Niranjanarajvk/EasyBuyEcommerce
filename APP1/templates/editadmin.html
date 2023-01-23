@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form style="width:100%;margin-left:300px; margin-top:100px;"method="post" action="{% url 'updateadmin' dataid=data.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                        <center><h2>Admin Page</h2></center>
+                    <label for="exampleInputname">Name</label>
+                    <input type="text" class="form-control" id="exampleInputname" placeholder=" Name" name="name" value="{{data.Name}}">
+                  </div>
+                    <div class="form-group">
+                    <label for="exampleInputmobile">Mobile Number</label>
+                    <input type="text" class="form-control" id="exampleInputmobile" placeholder="Mobile Number" name="mob"value="{{data.MobileNumber}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputmail">EmailID</label>
+                    <input type="email" class="form-control" id="exampleInputmail" placeholder="Email" name="mail" value="{{data.EmailID}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputFile">File input</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="image" value="{{data.Image.url}}">
+                      </div>
+                    </div>
+                     </div>
+                    </div>
+                  <div class="form-group">
+                    <label for="exampleInputusername">User Name</label>
+                    <input type="text" class="form-control" id="exampleInputusername" placeholder="User Name" name="username" value="{{data.UserName}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputpwd">Password</label>
+                    <input type="password" class="form-control" id="exampleInputpwd" placeholder="Password" name="pwd">
+                  </div>
+                   <div class="form-group">
+                    <label for="exampleInputconfpwd">Confirm Password</label>
+                    <input type="password" class="form-control" id="exampleInputconfpwd" placeholder="Confirm Password" name="confpwd">
+                  </div>
+
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button onclick="alert('NewAdmin') " type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+</form>
+
+</body>
+</html>
+{% endblock %}

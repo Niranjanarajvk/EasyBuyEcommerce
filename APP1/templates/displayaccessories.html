@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="width:80%; margin-left:300px;">
+<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Women Fashion Details</h5>
+			  <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">AccessoriesName</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in data %}
+                  <tr>
+
+                            <td> {{i.AccessoriesName}} </td>
+                             <td>{{i.Code}}</td>
+                            <td>{{i.Price}}</td>
+
+                             <td>
+                             <img src="{{ i.Image.url }}" width="50px" height="50px">
+                             </td>
+
+                         <td>
+                              <form action="{% url 'editaccess'  dataid=i.id %}">
+                                {% csrf_token %}
+                              <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
+                              </td>
+                        <td>
+                                <form action="{% url 'deleteaccess' dataid=i.id %}">
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </form>
+                            </td>
+
+                  </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+
+</body>
+</html>
+{% endblock %}

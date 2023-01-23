@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form style="width:100%;margin-left:300px; margin-top:50px;" method="post" action="{% url 'categorypagedb' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-lg-6">
+           <center><h2>Add Category</h2></center>
+         <div class="card">
+           <div class="card-body">
+           <div class="card-title">Category</div>
+
+           <hr>
+            <form>
+                <div class="form-group">
+            <label for="input-1">Category Name</label>
+            <input type="text" class="form-control" id="input-1" placeholder="CATEGORY"  name="name"  value="{{data.CategoryName}}" >
+           </div>
+                <div class="form-group">
+            <label for="input-3">Brand</label>
+            <input type="text" class="form-control" id="input-3" placeholder="BRAND " name="brand" value="{{data.Brand}}">
+           </div>
+           <div class="form-group">
+            <label for="input-2">Description</label>
+            <input type="text" class="form-control" id="input-2" placeholder="DESCRIPTION" name="desc" value="{{data.Description}}">
+           </div>
+
+                 <div class="form-group">
+                    <label for="exampleInputFile">Image</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="image" value="{{data.Image.url}}">
+                      </div>
+                    </div>
+                  </div>
+
+           <div class="form-group">
+            <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Submit</button>
+          </div>
+          </form>
+         </div>
+
+         </div>
+      </div>
+</form>
+
+</body>
+</html>
+{% endblock %}

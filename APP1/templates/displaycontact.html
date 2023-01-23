@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="width:80%; margin-left:300px;">
+<div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Contact Details</h5>
+			  <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">EmailID</th>
+                    <th scope="col">Message</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in data %}
+                  <tr>
+
+                            <td> {{i.EmailID}} </td>
+                             <td>{{i.Message}}</td>
+                      <td>
+                          <form action="{% url 'delcontact' dataid=i.id %}">
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                          </form>
+                      </td>
+
+
+
+                  </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+
+</body>
+</html>
+{% endblock %}
