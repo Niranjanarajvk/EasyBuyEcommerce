@@ -14,4 +14,3 @@ class cartdb(models.Model):
     Price=models.IntegerField(null=True,blank=True)
     Quantity=models.IntegerField(null=True,blank=True)
     Totalprice=models.IntegerField(null=True,blank=True)
-    Image= models.ImageField(upload_to="profile", null=True)

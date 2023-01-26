@@ -351,16 +351,14 @@
 
 
 
-											<form action="{% url 'signuppg' %}">
-											<button type="submit" class="btn btn-primary py-3 px-4" > Create an Account</button>
-											</form><br>
+
 
 
 
 	<section class="left" >
   <form method="post" action="{% url 'customerlogin' %}" enctype="multipart/form-data" style="width:500px; float-left;" >
 	  {% csrf_token %}
-	  <h2>LOGIN FORM</h2>
+	  <h2><b>LOGIN</b> </h2>
   <div class="mb-3" >
     <label for="exampleInputusername" class="form-label">UserName</label>
     <input type="text" class="form-control" id="exampleInputusername" name="username" required="">
@@ -374,12 +372,16 @@
         </div>
       <hr>
       <div class="actions">
-     <input tabindex="9" class="btn btn-inverse large" type="submit" value="Sign into your account">
+<!--     <input tabindex="9" class="btn btn-inverse large" type="submit" value="Sign into your account">-->
           <h>{{msg}}</h>
 <!--       <p class="reset">Recover Your <a tabindex="4" href="#" title="Recover your username and password" >UserName or Password</a></p>-->
       </div>
 
 </form>
+		<div>
+			<p class="mb-0">Don't have an account? <a href="{% url 'signuppg' %}" class="text-white-50 fw-bold">Sign Up</a></p>
+		</div>
+
 </section><br><br>
 
 

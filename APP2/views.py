@@ -6,17 +6,20 @@ from django.contrib import messages
 # Create your views here.
 def Homepage(request):
     data=categorydb.objects.all()
+    da=cartdb.objects.all()
     products=productdatabase.objects.all()
-    return render(request,'webindex.html',{'data':data ,'products':products})
+    return render(request,'webindex.html',{'data':data ,'products':products,'da':da})
 
 
 def Aboutpage(request):
     data=categorydb.objects.all()
-    return render(request,'About.html',{'data':data})
+    da = cartdb.objects.all()
+    return render(request,'About.html',{'data':data, 'da':da})
 
 def Contactpage(request):
     data=categorydb.objects.all()
-    return render(request,'Contact.html',{'data':data})
+    da = cartdb.objects.all()
+    return render(request,'Contact.html',{'data':data,'da':da})
 
 def Contactdatabase(request):
     if request.method=="POST":
@@ -28,19 +31,22 @@ def Contactdatabase(request):
 
 def Productdetails(request):
     data1 = productdatabase.objects.all()
+    da = cartdb.objects.all()
     data=categorydb.objects.all()
-    return render(request, 'App2Product.html', {'data1': data1,'data':data})
+    return render(request, 'App2Product.html', {'data1': data1,'data':data,'da':da})
 
 
 def displaycategory(request,itemCatg):
     data=categorydb.objects.all()
+    da=cartdb.objects.all()
     print("===itemCatg===",itemCatg)
     catg=itemCatg.upper()
     products=productdatabase.objects.filter(CategoryName=itemCatg)
     context = {
         'products':products,
         'catg':catg,
-        'data':data
+        'data':data,
+        'da':da
 
     }
     return render(request,'Categorydisplay.html',context)
@@ -49,20 +55,24 @@ def displaycategory(request,itemCatg):
 
 def displayproduct(request,dataid):
     data1=categorydb.objects.all()
+    da = cartdb.objects.all()
     data=productdatabase.objects.get(id=dataid)
     context2 ={
         'data': data,
-        'data1': data1
+        'data1': data1,
+        'da': da
 
     }
     return render(request,'Productcontent.html',context2)
 
 def loginadmin(request):
     data=categorydb.objects.all()
-    return render(request,'LoginReg.html',{'data':data})
+    da = cartdb.objects.all()
+    return render(request,'LoginReg.html',{'data':data,'da': da })
 def signuppg(request):
     data = categorydb.objects.all()
-    return render(request,'Registration.html',{'data':data})
+    da = cartdb.objects.all()
+    return render(request,'Registration.html',{'data':data, 'da':da})
 def customersave(request):
     if request.method=="POST":
         un=request.POST.get('username')
@@ -72,9 +82,12 @@ def customersave(request):
         if pw==cp:
             obj = CustomerDetails(username=un,email=em,password=pw,confirmpassword=cp)
             obj.save()
+            messages.success(request,"User Register Successfully")
             return redirect(loginadmin)
         else:
-         return render(request, 'Registration.html')
+            messages.warning(request, "Sorry.... Invalid Username Or Password")
+            return redirect(signuppg)
+    return render(request, 'Registration.html',{'msg': "sorry.... password not matched"})
 
 def customerlogin(request):
     if request.method=='POST':
@@ -97,7 +110,8 @@ def customerlogout(request):
 
 def Blogpage(request):
     data=categorydb.objects.all()
-    return render(request,'Blog.html',{'data':data})
+    da = cartdb.objects.all()
+    return render(request,'Blog.html',{'data':data,'da':da})
 
 def Blogdatabase(request):
     if request.method=="POST":
@@ -121,8 +135,7 @@ def cartdbfn(request):
         de = request.POST.get('desc')
         qn = request.POST.get('quantity')
         tp = request.POST.get('totalprice')
-        img = request.FILES['image']
-        obj =cartdb(ProductName=pn,Price=pr,Description=de,Image=img,Quantity=qn,Totalprice=tp)
+        obj =cartdb(ProductName=pn,Price=pr,Description=de,Quantity=qn,Totalprice=tp)
         obj.save()
     return redirect(cartpage)
 
